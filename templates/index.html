@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">Welcome to Flask Boggle Game</h1>
+
+<table class="table table-hover mt-4">
+    <tbody>
+
+        {% for row in range(5) %}
+        <tr>
+            {% for word in range(5) %}
+            <td>{{session['board'][row][word]}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
+
+<form class="mt-4 user-guess-form" method="post">
+
+    <div class="form-group">
+        <label class="form-label" for="guess">Your Guess</label>
+        <input class="form-control" type="text" name="guess" id="guess" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Submit your guess</button>
+</form>
+
+<div class="result mt-4"></div>
+
+{% endblock %}
