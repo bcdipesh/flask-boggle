@@ -14,6 +14,7 @@ def display_home_page():
     if not 'board' in session:
         game_board = boggle_game.make_board()
         session['board'] = game_board
+        session['total_score'] = 0
     return render_template('index.html')
 
 
@@ -26,4 +27,9 @@ def check_user_guess():
 
     is_word_valid = boggle_game.check_valid_word(session['board'], user_guess)
 
-    return jsonify(result=is_word_valid)
+    if is_word_valid == 'ok':
+        total_score = session['total_score']
+        total_score += len(user_guess)
+        session['total_score'] = total_score
+
+    return jsonify(result=is_word_valid, total_score=total_score)
